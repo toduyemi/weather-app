@@ -8,7 +8,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  
+
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -32,11 +32,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/rough.html',
-    }),
-  ],
-
- 
+  plugins: [new HtmlWebpackPlugin({})],
 };

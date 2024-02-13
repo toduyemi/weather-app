@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "weather-app",
   "version": "1.0.0",
   "description": "get 'er done list",
   "main": "index.js",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "date-fns": "^2.30.0",
-    "normalize.css": "^8.0.1",
+    "modern-normalize": "^2.0.0",
     "reset-css": "^5.0.2"
   },
   "devDependencies": {
