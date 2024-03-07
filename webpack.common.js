@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotEnv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -32,5 +33,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({})],
+  plugins: [new HtmlWebpackPlugin({}), new dotEnv()],
 };

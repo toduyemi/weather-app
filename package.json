@@ -16,12 +16,15 @@
   "license": "ISC",
   "dependencies": {
     "date-fns": "^2.30.0",
+    "dotenv": "^16.4.4",
+    "dotenv-webpack": "^8.0.1",
     "modern-normalize": "^2.0.0",
     "reset-css": "^5.0.2"
   },
   "devDependencies": {
     "@prettier/sync": "^0.3.0",
     "@stylistic/eslint-plugin": "^1.5.3",
+    "@types/dotenv-webpack": "^7.0.7",
     "css-loader": "^6.8.1",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -31,6 +34,7 @@
     "html-webpack-plugin": "^5.6.0",
     "prettier": "^3.1.1",
     "prettier-plugin-brace-style": "^0.4.1",
+    "process": "^0.11.10",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
