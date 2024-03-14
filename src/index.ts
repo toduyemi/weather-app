@@ -1,15 +1,14 @@
+import { getCoord, parseCurrentWeather, parse5DayForecast } from './dataUtils';
 import {
-  trimDate,
-  groupBy,
-  getMostFrequent,
-  createForecastArr,
-  getObjectKeys,
-  getHigh,
-  getLow,
-  create5DayForecast,
-  getCoord,
-} from './dataUtils';
-import { ForecastResponse, WeatherResponse, List } from './openWeather.types';
+  WeatherResponse,
+  GeoCityResponse,
+  ForecastResponse,
+} from './openWeather.types';
+import { Coordinates } from './appTypes.types';
+
+import './style.css';
+import { renderDailyCards } from './daily-forecast';
+import { renderWeather } from './current-weather';
 
 /*
 -basic async function to hit api and return data of interest
@@ -42,16 +41,32 @@ export const url = {
     return `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${process.env.API_KEY}`;
   },
 };
-let city = 'Toronto';
+let city = 'Po';
 
 let coord = {
   lat: '44.34',
   lon: '10.99',
 };
 
-const geo = await fetchData(url.geo(city));
+const geo = await fetchData<GeoCityResponse[]>(url.geo(city));
 console.log(geo);
 
-const response = await fetchData<ForecastResponse>(url.forecast(getCoord(geo)));
+const responseFore = await fetchData<ForecastResponse>(
+  url.forecast(getCoord(geo)),
+);
 
-console.log(create5DayForecast(response));
+const responseWeath = await fetchData<WeatherResponse>(
+  url.weather(getCoord(geo)),
+);
+
+console.log(responseFore);
+console.log(responseWeath);
+
+const daily = parse5DayForecast(responseFore);
+
+const today = parseCurrentWeather(responseWeath);
+console.log(today);
+
+renderDailyCards(daily);
+renderWeather(today);
+console.log(parse5DayForecast(responseFore));

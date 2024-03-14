@@ -125,6 +125,7 @@ export interface GeoCityResponse {
   country: string;
   state: string;
 }
+
 // OpenWeather API GeoCode Postal/Zip Endpoint
 
 export interface GeoPostalResponse {

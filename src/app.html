@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>get yo weather</title>
+</head>
+
+<body>
+  <header>
+    <h1>get yo weather</h1>
+    <h1>Date</h1>
+  </header>
+  <form id="search-form" class="info-ctr">
+    <input type="text" placeholder="Location/City..." />
+    <button><svg viewBox="0 0 1024 1024">
+        <path class="path1"
+          d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+        </path>
+      </svg></button>
+  </form>
+
+  <div id="output-overlay">
+    <h1 id="output-title">Location - Date</h1>
+    <section id="current-ctr">
+      <h2 class="section-title">Current weather</h2>
+
+    </section>
+    <section id="daily-forecast">
+      cards of data
+
+    </section>
+    <section id="charts-ctr">
+      <div id="temp-chart"></div>
+      <div id="precipitation-chart"></div>
+    </section>
+  </div>
+
+  <template id="daily-template">
+    <li>
+      <div class="card">
+        <div class="date"></div>
+        <div class="icon"></div>
+        <div class="description"></div>
+        <div class="high"></div>
+        <div class="low"></div>
+      </div>
+    </li>
+  </template>
+
+  <template id="current-template">
+    <h1 id="temp-output"></h1>
+    <div id="icon-ctr"></div>
+    <h3 id="description-output"></h3>
+    <h3 id="feels-like">Feels like <div id="temp">
+        <h2>48C</h2>
+      </div>
+    </h3>
+  </template>
+</body>
+
+</html>

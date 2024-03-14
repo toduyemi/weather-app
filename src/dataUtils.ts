@@ -1,5 +1,16 @@
-import { Coordinates, ForecastCard, ForecastObj } from './appTypes.types';
-import { WeatherResponse, ForecastResponse, List } from './openWeather.types';
+import {
+  Coordinates,
+  ForecastCard,
+  ForecastObj,
+  WeatherCard,
+} from './appTypes.types';
+import {
+  WeatherResponse,
+  ForecastResponse,
+  List,
+  GeoCityResponse,
+} from './openWeather.types';
+import { fromUnixTime } from 'date-fns';
 
 // /*
 // -dynamic function generator: returns a function that groups data based on the property (key) called in initial argument.
@@ -40,6 +51,20 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
 
   return obj;
 }
+
+export function parseCurrentWeather(response: WeatherResponse): WeatherCard {
+  return {
+    name: response.name,
+    weather_id: response.weather[0].id,
+    weather_condition: response.weather[0].description,
+    weather_main: response.weather[0].main,
+    weather_icon: response.weather[0].icon,
+    date: fromUnixTime(response.dt).toDateString(),
+    temp: response.main.temp,
+    feels_like: response.main.feels_like,
+    timezone: response.timezone,
+  };
+}
 // export function createDescriptionArr(data: ForecastObj[]): DescriptionObj[] {
 //   const obj: DescriptionObj[] = [];
 
@@ -54,6 +79,7 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
 
 //   return obj;
 // }
+
 //IT WORKED
 export function trimDate(data: ForecastObj[]): ForecastObj[] {
   const forecast: ForecastObj[] = [];
@@ -107,6 +133,10 @@ export function getLow<T extends { temp: number }>(arr: T[]) {
   return arr.reduce((a, b) => (a < b.temp ? a : b.temp), arr[0].temp);
 }
 
+/*
+- counts id property because that appears to be the primary key for weather conditions
+- the other two weather properties can be extracted from json data map
+*/
 export function getMostFrequent<T extends { weather: { id: number } }>(
   obj: T[],
 ) {
@@ -127,7 +157,7 @@ export function getMostFrequent<T extends { weather: { id: number } }>(
   );
 }
 
-export function create5DayForecast(response: ForecastResponse) {
+export function parse5DayForecast(response: ForecastResponse) {
   const groupByDate = groupBy('date');
 
   const forecastArr = createForecastArr(response);
@@ -149,7 +179,7 @@ export function create5DayForecast(response: ForecastResponse) {
   return forecastWeather;
 }
 
-export function getCoord(response): Coordinates {
+export function getCoord(response: GeoCityResponse[]): Coordinates {
   return {
     lat: response[0].lat,
     lon: response[0].lon,

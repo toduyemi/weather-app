@@ -33,5 +33,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({}), new dotEnv()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/app.html'),
+    }),
+    new dotEnv(),
+  ],
 };

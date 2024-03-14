@@ -115,7 +115,8 @@
 
   "500": {
     "label": "light rain",
-    "icon": "rain"
+    "icon": "rain",
+    "image": "10d"
   },
 
   "501": {
@@ -320,100 +321,5 @@
     "label": "overcast clouds",
     "icon": "cloudy",
     "image": "04d"
-  },
-
-  "900": {
-    "label": "tornado",
-    "icon": "tornado"
-  },
-
-  "901": {
-    "label": "tropical storm",
-    "icon": "hurricane"
-  },
-
-  "902": {
-    "label": "hurricane",
-    "icon": "hurricane"
-  },
-
-  "903": {
-    "label": "cold",
-    "icon": "snowflake-cold"
-  },
-
-  "904": {
-    "label": "hot",
-    "icon": "hot"
-  },
-
-  "905": {
-    "label": "windy",
-    "icon": "windy"
-  },
-
-  "906": {
-    "label": "hail",
-    "icon": "hail"
-  },
-
-  "951": {
-    "label": "calm",
-    "icon": "sunny"
-  },
-
-  "952": {
-    "label": "light breeze",
-    "icon": "cloudy-gusts"
-  },
-
-  "953": {
-    "label": "gentle breeze",
-    "icon": "cloudy-gusts"
-  },
-
-  "954": {
-    "label": "moderate breeze",
-    "icon": "cloudy-gusts"
-  },
-
-  "955": {
-    "label": "fresh breeze",
-    "icon": "cloudy-gusts"
-  },
-
-  "956": {
-    "label": "strong breeze",
-    "icon": "cloudy-gusts"
-  },
-
-  "957": {
-    "label": "high wind, near gale",
-    "icon": "cloudy-gusts"
-  },
-
-  "958": {
-    "label": "gale",
-    "icon": "cloudy-gusts"
-  },
-
-  "959": {
-    "label": "severe gale",
-    "icon": "cloudy-gusts"
-  },
-
-  "960": {
-    "label": "storm",
-    "icon": "thunderstorm"
-  },
-
-  "961": {
-    "label": "violent storm",
-    "icon": "thunderstorm"
-  },
-
-  "962": {
-    "label": "hurricane",
-    "icon": "cloudy-gusts"
   }
 }
