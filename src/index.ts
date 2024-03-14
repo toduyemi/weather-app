@@ -41,7 +41,7 @@ export const url = {
     return `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${process.env.API_KEY}`;
   },
 };
-let city = 'Po';
+let city = 'alliston';
 
 let coord = {
   lat: '44.34',
