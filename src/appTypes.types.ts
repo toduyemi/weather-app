@@ -1,7 +1,7 @@
 export interface ForecastCard {
   [date: string]: {
-    temp_high: number;
-    temp_low: number;
+    temp_high: string;
+    temp_low: string;
     weather: string;
   };
 }
@@ -13,14 +13,15 @@ export interface WeatherCard {
   weather_main: string;
   weather_icon: string;
   date: string;
-  temp: number;
-  feels_like: number;
+  temp: string;
+  feels_like: string;
   timezone: number;
 }
 
 export interface ForecastObj {
   date: string;
   temp: number;
+  pop: number;
   weather: {
     id: number;
     main: string;

@@ -42,7 +42,9 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
 
   response?.list.forEach((item: List) => {
     let forecast = {
+      dt: item.dt,
       date: item.dt_txt,
+      pop: item.pop,
       temp: item.main.temp,
       weather: item.weather[0],
     };
@@ -51,7 +53,17 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
 
   return obj;
 }
+// export function createChartForeCast(response: ForecastResponse) {
+//   const obj = [];
 
+//   response.list.forEach((item: List) => {
+//     let forecast = {
+//       dt: item.dt,
+//       date: item.dt_txt,
+//       temp: item.main.temp
+//     }
+//   })
+// }
 export function parseCurrentWeather(response: WeatherResponse): WeatherCard {
   return {
     name: response.name,
@@ -60,8 +72,8 @@ export function parseCurrentWeather(response: WeatherResponse): WeatherCard {
     weather_main: response.weather[0].main,
     weather_icon: response.weather[0].icon,
     date: fromUnixTime(response.dt).toDateString(),
-    temp: response.main.temp,
-    feels_like: response.main.feels_like,
+    temp: (Math.round(response.main.temp * 2) / 2).toFixed(1),
+    feels_like: (Math.round(response.main.feels_like * 2) / 2).toFixed(1),
     timezone: response.timezone,
   };
 }
@@ -157,11 +169,10 @@ export function getMostFrequent<T extends { weather: { id: number } }>(
   );
 }
 
-export function parse5DayForecast(response: ForecastResponse) {
+export function parse5DayForecast(arr: ForecastObj[]) {
   const groupByDate = groupBy('date');
 
-  const forecastArr = createForecastArr(response);
-  const trimmed = trimDate(forecastArr);
+  const trimmed = trimDate(arr);
   const sorted = groupByDate(trimmed);
 
   const keys: string[] = getObjectKeys(sorted);
@@ -170,8 +181,8 @@ export function parse5DayForecast(response: ForecastResponse) {
   for (const key of keys) {
     // let dailyDescriptions = litty[key].map((item) => item.weather.description);
     forecastWeather[key] = {
-      temp_high: getHigh(sorted[key]),
-      temp_low: getLow(sorted[key]),
+      temp_high: Math.round(getHigh(sorted[key])).toFixed(1),
+      temp_low: Math.round(getLow(sorted[key])).toFixed(1),
       weather: getMostFrequent(sorted[key]),
     };
   }
