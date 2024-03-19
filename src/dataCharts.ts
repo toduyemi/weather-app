@@ -106,7 +106,7 @@ export async function renderChart(forecast: ForecastObj[]) {
                 formatter: (value, context) => {
                   const bar = forecast[context.dataIndex];
                   const words = bar.weather.description.split(' ');
-                  return [words[0], words[1]];
+                  return [...words];
                 },
               },
               value: {
