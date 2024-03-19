@@ -33,6 +33,7 @@ export interface List {
   visibility: number;
   pop: number;
   rain?: Rain;
+  snow?: Snow;
   sys: Sys;
   dt_txt: string;
 }
@@ -56,6 +57,7 @@ export interface Main {
 export interface Rain {
   '3h': number;
 }
+export interface Snow extends Rain {}
 
 export interface Sys {
   pod: string;

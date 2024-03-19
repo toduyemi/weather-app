@@ -16,7 +16,7 @@ export async function renderChart(forecast: ForecastObj[]) {
     options: {
       layout: {
         padding: {
-          bottom: 10.15,
+          bottom: 47.15,
         },
       },
       maintainAspectRatio: false,
@@ -74,6 +74,9 @@ export async function renderChart(forecast: ForecastObj[]) {
           display: false,
           max: getMaxValueWithPadding(),
         },
+        yLev: {
+          display: false,
+        },
       },
     },
     data: {
@@ -93,17 +96,54 @@ export async function renderChart(forecast: ForecastObj[]) {
           yAxisID: 'yPop',
           type: 'bar',
           datalabels: {
-            anchor: 'end',
-            align: 'end',
-            font: {
-              weight: 'bold',
+            labels: {
+              description: {
+                anchor: 'start',
+                align: 'start',
+                font: {
+                  size: 8.5,
+                },
+                formatter: (value, context) => {
+                  const bar = forecast[context.dataIndex];
+                  const words = bar.weather.description.split(' ');
+                  return [words[0], words[1]];
+                },
+              },
+              value: {
+                anchor: 'end',
+                align: 'end',
+                font: {
+                  size: 8.5,
+                  weight: 'bold',
+                },
+                formatter: (value, context) => {
+                  const bar = forecast[context.dataIndex];
+                  const sum = (bar.rain ?? 0) + (bar.snow ?? 0);
+                  if (sum)
+                    return `${sum} mm/h\n${(
+                      (value as number) * 100
+                    ).toFixed()}%`;
+                  else return `${((value as number) * 100).toFixed()}%`;
+                },
+                textAlign: 'center',
+              },
             },
-            formatter: (value) => `${((value as number) * 100).toFixed()}%`,
           },
+        },
+        {
+          label: '3h rain',
+          type: 'bar',
+          yAxisID: 'yLev',
+          data: forecast.map((row) => row.pop),
+          datalabels: {
+            anchor: 'start',
+          },
+          hidden: true,
         },
       ],
     },
   });
+  // Chart2 ===================>
   const chartCtr2 = document.querySelector('#temp-chart2') as HTMLCanvasElement;
   new Chart(chartCtr2, {
     type: 'line',
@@ -111,7 +151,8 @@ export async function renderChart(forecast: ForecastObj[]) {
       maintainAspectRatio: false,
       layout: {
         padding: {
-          top: 51.35,
+          top: 30,
+          bottom: 41,
         },
       },
       animation: false,
@@ -138,9 +179,9 @@ export async function renderChart(forecast: ForecastObj[]) {
           ticks: {
             display: false,
           },
-          grid: {
-            drawTicks: false,
-          },
+          // grid: {
+          //   drawTicks: false,
+          // },
         },
         y: {
           afterFit: (ctx) => {
@@ -163,5 +204,3 @@ export async function renderChart(forecast: ForecastObj[]) {
     },
   });
 }
-
-// Chart2 ===================>

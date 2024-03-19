@@ -41,13 +41,20 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
   const obj: ForecastObj[] = [];
 
   response?.list.forEach((item: List) => {
-    let forecast = {
+    let forecast: ForecastObj = {
       dt: item.dt,
       date: item.dt_txt,
       pop: item.pop,
       temp: item.main.temp,
       weather: item.weather[0],
     };
+
+    if (item.rain) {
+      forecast.rain = item.rain['3h'];
+    }
+    else if (item.snow) {
+      forecast.snow = item.snow['3h'];
+    }
     obj.push(forecast);
   });
 

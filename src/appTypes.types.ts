@@ -19,6 +19,7 @@ export interface WeatherCard {
 }
 
 export interface ForecastObj {
+  dt: number;
   date: string;
   temp: number;
   pop: number;
@@ -28,6 +29,8 @@ export interface ForecastObj {
     description: string;
     icon: string;
   };
+  rain?: number;
+  snow?: number;
 }
 
 export interface Coordinates {
