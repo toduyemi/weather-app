@@ -46,3 +46,18 @@ export interface JSONMap {
     image?: string;
   };
 }
+
+export enum Units {
+  metric = 'metric',
+  imperial = 'imperial',
+}
+
+export type CitiesObj = {
+  label: {
+    name: string;
+    region: string;
+    country: string;
+    countryCode: string;
+  };
+  coord: Coordinates;
+};

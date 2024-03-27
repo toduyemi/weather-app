@@ -1,30 +1,31 @@
-import { WeatherCard, JSONMap } from './appTypes.types';
-import * as openWeather from './openWeatherIcons.json';
+import { iconPath } from '.';
+import { Units, WeatherCard } from './appTypes.types';
+import { getElement, printUnit } from './controller';
 
-export function renderWeather(current: WeatherCard): void {
-  // const map = JSON.parse(openWeather);
+export function renderWeather(current: WeatherCard, unitState: Units) {
   renderTitle(current);
-  const map: JSONMap = openWeather;
-  //   const today = document.createElement('ul');
-  //   today.classList.add('daily-list');
-  const template: HTMLTemplateElement =
-    document.querySelector('#current-template')!;
+
+  const template: HTMLTemplateElement = getElement(
+    '#current-template',
+    HTMLTemplateElement,
+  );
 
   const currentCard = document.importNode(template.content, true);
 
   const weatherIcon = new Image();
-  weatherIcon.src = `./assets/weather-icons-master/production/line/openweathermap/${current.weather_icon}.svg`;
+  weatherIcon.src = iconPath + `${current.weather_icon}.svg`;
 
-  currentCard.querySelector('#temp-output')!.textContent = `${current.temp}`;
+  currentCard.querySelector('#temp-output')!.innerHTML =
+    `${current.temp}` + printUnit(unitState);
   currentCard.querySelector('#icon-ctr')!.appendChild(weatherIcon);
   currentCard.querySelector('#description-output')!.textContent =
     `${current.weather_condition}`;
-  currentCard.querySelector('#feels-like #temp')!.textContent =
-    `${current.feels_like}`;
+  currentCard.querySelector('#feels-like #temp')!.innerHTML =
+    `${current.feels_like}` + printUnit(unitState);
 
   //   today.appendChild(dailyCard);
 
-  document.querySelector('#current-ctr')?.appendChild(currentCard);
+  document.querySelector('#current-ctr')?.replaceChildren(currentCard);
 }
 
 export function renderTitle(current: WeatherCard) {

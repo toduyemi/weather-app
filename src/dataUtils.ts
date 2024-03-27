@@ -49,12 +49,8 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
       weather: item.weather[0],
     };
 
-    if (item.rain) {
-      forecast.rain = item.rain['3h'];
-    }
-    else if (item.snow) {
-      forecast.snow = item.snow['3h'];
-    }
+    if (item.rain) forecast.rain = item.rain['3h'];
+    if (item.snow) forecast.snow = item.snow['3h'];
     obj.push(forecast);
   });
 
@@ -180,7 +176,10 @@ export function parse5DayForecast(arr: ForecastObj[]) {
   const groupByDate = groupBy('date');
 
   const trimmed = trimDate(arr);
+  console.log(trimmed);
+
   const sorted = groupByDate(trimmed);
+  console.log(sorted);
 
   const keys: string[] = getObjectKeys(sorted);
 

@@ -5,12 +5,19 @@ import { enUS } from 'date-fns/locale';
 import { ForecastObj } from './appTypes.types';
 
 //chart 1 ===================>
+let chart1: Chart, chart2: Chart;
 export async function renderChart(forecast: ForecastObj[]) {
   const getMaxValueWithPadding = () => {
-    return Math.max(...forecast.map((row) => row.pop)) + 0.1;
+    return (
+      Math.max(...forecast.map((row) => (row.rain ?? 0) + (row.snow ?? 0))) *
+      1.1
+    );
   };
   const chartCtr = document.querySelector('#temp-chart1') as HTMLCanvasElement;
-  new Chart(chartCtr, {
+  if (chart1) chart1.destroy();
+  if (chart2) chart2.destroy();
+
+  chart1 = new Chart(chartCtr, {
     type: 'line',
     plugins: [ChartDataLabels],
     options: {
@@ -19,22 +26,10 @@ export async function renderChart(forecast: ForecastObj[]) {
           bottom: 47.15,
         },
       },
+
       maintainAspectRatio: false,
       animation: false,
       plugins: {
-        // zoom: {
-        //   pan: {
-        //     // pan options and/or events
-        //     enabled: true,
-        //     mode: 'x',
-        //   },
-        //   limits: {
-        //     // axis limits
-        //   },
-        //   zoom: {
-        //     // zoom options and/or events
-        //   },
-        // },
         legend: {
           display: false,
         },
@@ -45,6 +40,9 @@ export async function renderChart(forecast: ForecastObj[]) {
             date: {
               locale: enUS,
             },
+          },
+          grid: {
+            display: false,
           },
           type: 'time',
           ticks: {
@@ -64,7 +62,7 @@ export async function renderChart(forecast: ForecastObj[]) {
             display: false,
           },
           grid: {
-            drawTicks: false,
+            display: false,
           },
           border: {
             display: false,
@@ -91,8 +89,8 @@ export async function renderChart(forecast: ForecastObj[]) {
           },
         },
         {
-          label: 'probability of preciptation',
-          data: forecast.map((row) => row.pop),
+          label: '3h rain level',
+          data: forecast.map((row) => (row.rain ?? 0) + (row.snow ?? 0)),
           yAxisID: 'yPop',
           type: 'bar',
           datalabels: {
@@ -109,43 +107,42 @@ export async function renderChart(forecast: ForecastObj[]) {
                   return [...words];
                 },
               },
-              value: {
+              precipitation: {
                 anchor: 'end',
                 align: 'end',
+                offset: 15,
                 font: {
-                  size: 8.5,
+                  size: 8.3,
                   weight: 'bold',
                 },
                 formatter: (value, context) => {
+                  if (value) return `${value} mm/h`;
+                  else return '';
+                },
+                textAlign: 'center',
+              },
+              probability: {
+                anchor: 'end',
+
+                align: 'end',
+                font: {
+                  size: 8.3,
+                },
+                formatter: (value, context) => {
                   const bar = forecast[context.dataIndex];
-                  const sum = (bar.rain ?? 0) + (bar.snow ?? 0);
-                  if (sum)
-                    return `${sum} mm/h\n${(
-                      (value as number) * 100
-                    ).toFixed()}%`;
-                  else return `${((value as number) * 100).toFixed()}%`;
+                  return `${(bar.pop * 100).toFixed()}%`;
                 },
                 textAlign: 'center',
               },
             },
           },
         },
-        {
-          label: '3h rain',
-          type: 'bar',
-          yAxisID: 'yLev',
-          data: forecast.map((row) => row.pop),
-          datalabels: {
-            anchor: 'start',
-          },
-          hidden: true,
-        },
       ],
     },
   });
   // Chart2 ===================>
   const chartCtr2 = document.querySelector('#temp-chart2') as HTMLCanvasElement;
-  new Chart(chartCtr2, {
+  chart2 = new Chart(chartCtr2, {
     type: 'line',
     options: {
       maintainAspectRatio: false,
@@ -157,19 +154,6 @@ export async function renderChart(forecast: ForecastObj[]) {
       },
       animation: false,
       plugins: {
-        // zoom: {
-        //   pan: {
-        //     // pan options and/or events
-        //     enabled: true,
-        //     mode: 'x',
-        //   },
-        //   limits: {
-        //     // axis limits
-        //   },
-        //   zoom: {
-        //     // zoom options and/or events
-        //   },
-        // },
         legend: {
           display: false,
         },
@@ -179,9 +163,6 @@ export async function renderChart(forecast: ForecastObj[]) {
           ticks: {
             display: false,
           },
-          // grid: {
-          //   drawTicks: false,
-          // },
         },
         y: {
           afterFit: (ctx) => {

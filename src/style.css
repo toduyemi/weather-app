@@ -28,6 +28,64 @@ header {
   grid-area: 1/1/2/4;
   display: flex;
 }
+
+/* unit toggle */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 60px;
+  height: 34px;
+}
+
+#unit-toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  align-self: center;
+  vertical-align: middle;
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: whitesmoke;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+#unit-toggle:checked + .slider {
+  background-color: #2196f3;
+}
+
+#unit-toggle:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+#unit-toggle:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
 #search-form {
   grid-area: 2/1/3/4;
 
@@ -125,7 +183,7 @@ button {
 }
 .box {
   border: none;
-  width: calc(2000px - 28px);
+  width: calc(2200px - 28px);
   height: 500px;
 }
 canvas {
