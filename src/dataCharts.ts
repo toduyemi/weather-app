@@ -21,6 +21,7 @@ export async function renderChart(forecast: ForecastObj[]) {
     type: 'line',
     plugins: [
       ChartDataLabels,
+      //@ts-ignore
       {
         afterDatasetUpdate: (chart, args) => {
           console.log(
