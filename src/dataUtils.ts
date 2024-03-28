@@ -176,10 +176,10 @@ export function parse5DayForecast(arr: ForecastObj[]) {
   const groupByDate = groupBy('date');
 
   const trimmed = trimDate(arr);
-  console.log(trimmed);
+  // console.log(trimmed);
 
   const sorted = groupByDate(trimmed);
-  console.log(sorted);
+  // console.log(sorted);
 
   const keys: string[] = getObjectKeys(sorted);
 

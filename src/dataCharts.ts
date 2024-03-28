@@ -19,7 +19,17 @@ export async function renderChart(forecast: ForecastObj[]) {
 
   chart1 = new Chart(chartCtr, {
     type: 'line',
-    plugins: [ChartDataLabels],
+    plugins: [
+      ChartDataLabels,
+      {
+        afterDatasetUpdate: (chart, args) => {
+          console.log(
+            args.meta.data.map((d) => d.y),
+            args.index,
+          );
+        },
+      },
+    ],
     options: {
       layout: {
         padding: {
@@ -80,7 +90,14 @@ export async function renderChart(forecast: ForecastObj[]) {
     data: {
       labels: forecast.map((row) => row.date),
       datasets: [
+        //test data for NaN
         {
+          label: '# of Points',
+          data: new Array(40).fill(0),
+          borderWidth: 1,
+        },
+        {
+          type: 'line',
           label: 'temp every 3 hrs',
           data: forecast.map((row) => row.temp),
           yAxisID: 'yTemp',
@@ -90,7 +107,12 @@ export async function renderChart(forecast: ForecastObj[]) {
         },
         {
           label: '3h rain level',
-          data: forecast.map((row) => (row.rain ?? 0) + (row.snow ?? 0)),
+          data: forecast.map((row) => {
+            const value = (row.rain ?? 0) + (row.snow ?? 0);
+            console.log(value);
+            return value;
+            // return 0;
+          }),
           yAxisID: 'yPop',
           type: 'bar',
           datalabels: {

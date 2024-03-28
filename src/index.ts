@@ -47,7 +47,7 @@ export async function fetchData<TData>({
   options,
 }: {
   url: string;
-  units: string;
+  units?: string;
   options?: RequestInit;
 }): Promise<TData> {
   const response = await fetch(url + (units ?? ''), options);
