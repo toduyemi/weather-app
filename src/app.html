@@ -27,15 +27,19 @@
   </form> -->
 
   <div id="output-overlay">
-    <h1 id="output-title"></h1>
-    <section id="current-ctr">
-
-
+    <section id="date-ctr">
+      <h2 id="local-date"></h2>
+      <h2 id="location"></h2>
     </section>
     <section id="daily-forecast">
       cards of data
 
     </section>
+    <section id="current-ctr">
+
+
+    </section>
+
     <section id="charts-ctr">
       <div class="chart-ctr">
         <div class="colSmall">
@@ -64,16 +68,42 @@
   </template>
 
   <template id="current-template">
-    <h2 class="section-title">Current weather</h2>
-    <h1 id="temp-output"></h1>
+
+    <div id="temp-output">
+    </div>
     <div id="icon-ctr">
       <h3 id="description-output"></h3>
     </div>
 
-    <h3 id="feels-like">Feels like <div id="temp">
-        <h2></h2>
-      </div>
-    </h3>
+
+
+  </template>
+
+  <template id="daily-statistics">
+    <li class="stat-card" id="sunrise">
+      <img src="./static/assets/weather-icons-master/production/line/all/sunrise.svg" alt="">
+    </li>
+    <li class="stat-card" id="sunset">
+      <img src="./static/assets/weather-icons-master/production/line/all/sunset.svg" alt="">
+    </li>
+    <li class="stat-card" id="humidity">
+      <img src="./static/assets/weather-icons-master/production/line/all/humidity.svg" alt="">
+    </li>
+    <li class="stat-card" id="pressure">
+      <img src="./static/assets/weather-icons-master/production/line/all/barometer.svg" alt="">
+    </li>
+    <li class="stat-card" id="windspeed">
+      <img src="./static/assets/weather-icons-master/production/line/all/wind-beaufort-4.svg" alt="">
+    </li>
+    <li class="stat-card" id="precipitation">
+      <img src="./static/assets/weather-icons-master/production/line/all/.svg" alt="">
+    </li>
+    <li class="stat-card" id="pop">
+      <img src="./static/assets/weather-icons-master/production/line/all/raindrop-measure.svg" alt="">
+    </li>
+    <li class="stat-card" id="visibility">
+      <img src="./static/assets/weather-icons-master/production/line/all/haze.svg" alt="">
+    </li>
   </template>
 </body>
 

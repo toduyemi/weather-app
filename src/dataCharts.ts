@@ -19,18 +19,7 @@ export async function renderChart(forecast: ForecastObj[]) {
 
   chart1 = new Chart(chartCtr, {
     type: 'line',
-    plugins: [
-      ChartDataLabels,
-      //@ts-ignore
-      {
-        afterDatasetUpdate: (chart, args) => {
-          console.log(
-            args.meta.data.map((d) => d.y),
-            args.index,
-          );
-        },
-      },
-    ],
+    plugins: [ChartDataLabels],
     options: {
       layout: {
         padding: {
@@ -78,10 +67,12 @@ export async function renderChart(forecast: ForecastObj[]) {
           border: {
             display: false,
           },
+          min: 0,
         },
         yPop: {
           display: false,
-          max: getMaxValueWithPadding(),
+          // falsy OR in case get MaxValue returns 0 due to dataset of only 0s
+          max: getMaxValueWithPadding() || 1,
         },
         yLev: {
           display: false,
@@ -92,11 +83,13 @@ export async function renderChart(forecast: ForecastObj[]) {
       labels: forecast.map((row) => row.date),
       datasets: [
         //test data for NaN
-        {
-          label: '# of Points',
-          data: new Array(40).fill(0),
-          borderWidth: 1,
-        },
+        // {
+        //   yAxisID: 'yPop2',
+        //   type: 'bar',
+        //   label: '# of Points',
+        //   data: new Array(40).fill(0),
+        //   borderWidth: 1,
+        // },
         {
           type: 'line',
           label: 'temp every 3 hrs',
@@ -109,9 +102,8 @@ export async function renderChart(forecast: ForecastObj[]) {
         {
           label: '3h rain level',
           data: forecast.map((row) => {
-            const value = (row.rain ?? 0) + (row.snow ?? 0);
-            console.log(value);
-            return value;
+            return (row.rain ?? 0) + (row.snow ?? 0);
+
             // return 0;
           }),
           yAxisID: 'yPop',
@@ -194,6 +186,7 @@ export async function renderChart(forecast: ForecastObj[]) {
           ticks: {
             callback: (value) => `${value} C`,
           },
+          min: 0,
         },
       },
     },

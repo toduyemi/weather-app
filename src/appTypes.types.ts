@@ -3,19 +3,35 @@ export interface ForecastCard {
     temp_high: string;
     temp_low: string;
     weather: string;
+    timestamp: number;
+    timezone_offset: number;
   };
 }
 
 export interface WeatherCard {
   name: string;
+  country: string;
   weather_id: number;
   weather_condition: string;
   weather_main: string;
   weather_icon: string;
-  date: string;
+  dt: number;
   temp: string;
   feels_like: string;
-  timezone: number;
+  timezone: string;
+  highlights: {
+    sunrise: number;
+    sunset: number;
+    uvi: number;
+    humidity: number;
+    pressure: number;
+    wind_speed: number;
+    wind_deg: number;
+    rain: number;
+    snow: number;
+    pop: number;
+    visibility: number;
+  };
 }
 
 export interface ForecastObj {
@@ -31,6 +47,7 @@ export interface ForecastObj {
   };
   rain?: number;
   snow?: number;
+  timezone_offset: number;
 }
 
 export interface Coordinates {

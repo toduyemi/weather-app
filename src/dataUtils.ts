@@ -9,6 +9,7 @@ import {
   ForecastResponse,
   List,
   GeoCityResponse,
+  OneCallResponse,
 } from './openWeather.types';
 import { fromUnixTime } from 'date-fns';
 
@@ -47,6 +48,7 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
       pop: item.pop,
       temp: item.main.temp,
       weather: item.weather[0],
+      timezone_offset: response.city.timezone,
     };
 
     if (item.rain) forecast.rain = item.rain['3h'];
@@ -67,17 +69,36 @@ export function createForecastArr(response: ForecastResponse): ForecastObj[] {
 //     }
 //   })
 // }
-export function parseCurrentWeather(response: WeatherResponse): WeatherCard {
+
+// parameter for forecast response object because the OneCallResponse does not carry the location name
+export function parseCurrentWeather(
+  response: OneCallResponse,
+  foreResponse: ForecastResponse,
+): WeatherCard {
   return {
-    name: response.name,
-    weather_id: response.weather[0].id,
-    weather_condition: response.weather[0].description,
-    weather_main: response.weather[0].main,
-    weather_icon: response.weather[0].icon,
-    date: fromUnixTime(response.dt).toDateString(),
-    temp: (Math.round(response.main.temp * 2) / 2).toFixed(1),
-    feels_like: (Math.round(response.main.feels_like * 2) / 2).toFixed(1),
+    name: foreResponse.city.name,
+    weather_id: response.current.weather[0].id,
+    weather_condition: response.current.weather[0].description,
+    weather_main: response.current.weather[0].main,
+    weather_icon: response.current.weather[0].icon,
+    dt: response.current.dt,
+    temp: (Math.round(response.current.temp * 2) / 2).toFixed(1),
+    feels_like: (Math.round(response.current.feels_like * 2) / 2).toFixed(1),
     timezone: response.timezone,
+    country: foreResponse.city.country,
+    highlights: {
+      sunrise: response.current.sunrise,
+      sunset: response.current.sunset,
+      uvi: response.current.uvi,
+      humidity: response.current.humidity,
+      pressure: response.current.pressure,
+      wind_speed: response.current.wind_speed,
+      wind_deg: response.current.wind_deg,
+      pop: response.hourly[0].pop,
+      rain: response.current.rain?.['1h'] ?? 0,
+      snow: response.current.snow?.['1h'] ?? 0,
+      visibility: 0,
+    },
   };
 }
 // export function createDescriptionArr(data: ForecastObj[]): DescriptionObj[] {
@@ -126,8 +147,10 @@ export function groupBy<K extends string>(key: K) {
 }
 
 //DONE
-export function getObjectKeys<T extends {}>(object: T): Array<keyof T> {
-  return Object.keys(object) as Array<keyof T>;
+export function getObjectKeys<T extends Record<string, unknown>>(
+  object: T,
+): Array<keyof T> {
+  return Object.keys(object);
 }
 
 export function getAverage(arr: number[], isRound = true) {
@@ -179,7 +202,7 @@ export function parse5DayForecast(arr: ForecastObj[]) {
   // console.log(trimmed);
 
   const sorted = groupByDate(trimmed);
-  // console.log(sorted);
+  console.log(sorted);
 
   const keys: string[] = getObjectKeys(sorted);
 
@@ -190,8 +213,11 @@ export function parse5DayForecast(arr: ForecastObj[]) {
       temp_high: Math.round(getHigh(sorted[key])).toFixed(1),
       temp_low: Math.round(getLow(sorted[key])).toFixed(1),
       weather: getMostFrequent(sorted[key]),
+      timestamp: sorted[key][0].dt,
+      timezone_offset: sorted[key][0].timezone_offset,
     };
   }
+  console.log(forecastWeather);
 
   return forecastWeather;
 }

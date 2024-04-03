@@ -8,6 +8,8 @@ module.exports = merge(common, {
     static: './src',
     port: 8080,
     hot: true,
-    watchFiles: ['src/*.html'],
+    liveReload: false,
+
+    // watchFiles: ['src/*.html'],
   },
 });

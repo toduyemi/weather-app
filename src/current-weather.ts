@@ -3,7 +3,7 @@ import { Units, WeatherCard } from './appTypes.types';
 import { getElement, printUnit } from './controller';
 
 export function renderWeather(current: WeatherCard, unitState: Units) {
-  renderTitle(current);
+  // renderTitle(current);
 
   const template: HTMLTemplateElement = getElement(
     '#current-template',
@@ -16,22 +16,22 @@ export function renderWeather(current: WeatherCard, unitState: Units) {
   weatherIcon.src = iconPath + `${current.weather_icon}.svg`;
 
   currentCard.querySelector('#temp-output')!.innerHTML =
-    `${current.temp}` + printUnit(unitState);
-  currentCard.querySelector('#icon-ctr')!.appendChild(weatherIcon);
+    `${current.temp}` + printUnit(unitState) + '<h3 id="feels-like"></h3>';
+  currentCard.querySelector('#icon-ctr')!.prepend(weatherIcon);
   currentCard.querySelector('#description-output')!.textContent =
     `${current.weather_condition}`;
-  currentCard.querySelector('#feels-like #temp')!.innerHTML =
-    `${current.feels_like}` + printUnit(unitState);
+  currentCard.querySelector('#feels-like')!.innerHTML =
+    `feels like ${current.feels_like}` + printUnit(unitState);
 
   //   today.appendChild(dailyCard);
 
   document.querySelector('#current-ctr')?.replaceChildren(currentCard);
 }
 
-export function renderTitle(current: WeatherCard) {
-  const titleCtr = document.querySelector('#output-title');
+// export function renderTitle(current: WeatherCard) {
+//   const titleCtr = document.querySelector('#output-title');
 
-  if (titleCtr) {
-    titleCtr.textContent = `${current.name} - ${current.date.substring(4, 10)}`;
-  }
-}
+//   if (titleCtr) {
+//     titleCtr.textContent = `${current.name} - ${current.dt.substring(4, 10)}`;
+//   }
+// }

@@ -37,6 +37,21 @@ export function parseUnitState(flag: boolean) {
   else return Units.imperial;
 }
 
+export function secondsToHHMM(seconds: number) {
+  if (seconds > 3600 || seconds < -3600) {
+    if (seconds > 0) {
+      return '+' + new Date(seconds * 1000).toISOString().substring(11, 16);
+    }
+    else {
+      return '-' + new Date(seconds * 1000).toISOString().substring(11, 16);
+    }
+  }
+  else {
+    throw Error(
+      'Number has to be more than 3600 and less than 90000 to maintain HH:MM format',
+    );
+  }
+}
 export function updateDateTime() {
   const now = new Date();
   const currentDate = now.toLocaleString('en-CA', {

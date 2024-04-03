@@ -48,7 +48,7 @@ function debouncePromise<TParams extends Array<unknown>, TRes>(
   };
 }
 
-const debounced = debouncePromise((items) => Promise.resolve(items), 1000);
+const debounced = debouncePromise((items) => Promise.resolve(items), 1100);
 
 export async function autoSearch() {
   //observe the unit Toggle

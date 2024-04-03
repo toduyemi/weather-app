@@ -8,6 +8,7 @@ import {
   WeatherResponse,
   GeoCityResponse,
   ForecastResponse,
+  OneCallResponse,
 } from './openWeather.types';
 import { CitiesObj, Coordinates, ForecastObj, Units } from './appTypes.types';
 
@@ -18,6 +19,7 @@ import { renderChart } from './dataCharts';
 import { GeoDBCityResponse } from './geoDB.types';
 import { autoSearch } from './autocomplete';
 import { getElement, parseUnitState, updateDateTime } from './controller';
+import { renderQueryTitle } from './date-time';
 
 /*
 -basic async function to hit api and return data of interest
@@ -37,7 +39,7 @@ class HTTPError extends Error {
 }
 export const iconPath =
   './static/assets/weather-icons-master/production/line/openweathermap/';
-const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/';
+const WEATHER_API_URL = 'https://api.openweathermap.org/data/';
 const GEO_CITIES_URL =
   'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/?sort=-population';
 
@@ -63,13 +65,13 @@ export const url = {
     if (!coord.lat || !coord.lon) {
       throw new Error();
     }
-    return `${WEATHER_API_URL}weather?lat=${coord.lat}&lon=${coord.lon}&appid=${process.env.API_KEY}`;
+    return `${WEATHER_API_URL}3.0/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=${process.env.API_KEY}`;
   },
   forecast(coord: Coordinates) {
     if (!coord.lat || !coord.lon) {
       throw new Error();
     }
-    return `${WEATHER_API_URL}forecast?lat=${coord.lat}&lon=${coord.lon}&appid=${process.env.API_KEY}`;
+    return `${WEATHER_API_URL}2.5/forecast?lat=${coord.lat}&lon=${coord.lon}&appid=${process.env.API_KEY}`;
   },
   geo(city: string = '', country: string = '') {
     return `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${process.env.API_KEY}`;
@@ -79,6 +81,7 @@ export const url = {
     return GEO_CITIES_URL + `&namePrefix=${city}&limit=7`;
   },
 
+  //return endpoint path for specified units
   units(unit: Units = Units.metric) {
     return `&units=${unit}`;
   },
@@ -165,7 +168,7 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
     units: unitUrl,
   });
 
-  const responseWeath = await fetchData<WeatherResponse>({
+  const responseWeath = await fetchData<OneCallResponse>({
     url: url.weather(coord),
     units: unitUrl,
   });
@@ -175,8 +178,8 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   renderChart(forecastArr);
   const daily = parse5DayForecast(forecastArr);
 
-  const today = parseCurrentWeather(responseWeath);
-
+  const today = parseCurrentWeather(responseWeath, responseFore);
+  renderQueryTitle(today);
   renderDailyCards(daily, unitState);
   renderWeather(today, unitState);
 }

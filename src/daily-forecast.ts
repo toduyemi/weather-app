@@ -1,14 +1,14 @@
 import { iconPath } from '.';
 import { ForecastCard, JSONMap, Units } from './appTypes.types';
-import { printUnit } from './controller';
+import { printUnit, secondsToHHMM } from './controller';
 import * as openWeather from './openWeatherIcons.json';
+import { formatInTimeZone } from 'date-fns-tz';
 
-export function renderDailyCards(
-  forecast: ForecastCard,
-  unitState: Units,
-): void {
+export function renderDailyCards(forecast: ForecastCard, unitState: Units) {
   // const map = JSON.parse(openWeather);
   const map: JSONMap = openWeather;
+  const thisWeekHeading = document.createElement('h2');
+  thisWeekHeading.textContent = 'This week';
   const daily = document.createElement('ul');
   daily.classList.add('daily-list');
   const template: HTMLTemplateElement =
@@ -20,8 +20,15 @@ export function renderDailyCards(
     const prop = forecast[day].weather as keyof typeof map;
     const weatherIcon = new Image();
     weatherIcon.src = iconPath + `${map[prop].image}.svg`;
+    console.log(new Date(forecast[day].timestamp * 1000));
+    const newTs = forecast[day].timestamp + forecast[day].timezone_offset;
+    console.log(secondsToHHMM(forecast[day].timezone_offset));
 
-    dailyCard.querySelector('.date')!.textContent = day;
+    dailyCard.querySelector('.date')!.textContent = formatInTimeZone(
+      forecast[day].timestamp * 1000,
+      secondsToHHMM(forecast[day].timezone_offset),
+      'iiii',
+    );
     dailyCard.querySelector('.icon')!.appendChild(weatherIcon);
     dailyCard.querySelector('.description')!.textContent = map[prop].label;
     dailyCard.querySelector('.high')!.innerHTML = `${
@@ -35,4 +42,5 @@ export function renderDailyCards(
   }
 
   document.querySelector('#daily-forecast')?.replaceChildren(daily);
+  document.querySelector('#daily-forecast')?.prepend(thisWeekHeading);
 }
