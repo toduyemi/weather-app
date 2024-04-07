@@ -39,6 +39,7 @@
     "@prettier/sync": "^0.3.0",
     "@stylistic/eslint-plugin": "^1.5.3",
     "@types/dotenv-webpack": "^7.0.7",
+    "@types/webpack-env": "^1.18.4",
     "css-loader": "^6.8.1",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",

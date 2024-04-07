@@ -185,3 +185,7 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   renderQueryTitle(today);
   renderDailyCards(daily, unitState);
 }
+
+if (module && module.hot) {
+  module.hot.accept();
+}

@@ -51,7 +51,7 @@ header h1 {
 /* TOP PANEL */
 #top-panel {
   display: grid;
-  grid-template: 1fr 8fr /1fr;
+  grid-template: 1fr auto / 1fr;
 }
 
 /* CURRENT-WEATHER */
