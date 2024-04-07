@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch",
     "start": "webpack serve --open-app-name 'Google Chrome' --config webpack.dev.js",
-    "gh-deploy": "git add . && git ci -m 'Deploy to gh' && git push origin OpenWeatherApi && git subtree push --prefix dist origin gh-pages",
+    "gh-deploy": "git add . && git ci -m 'Deploy to gh' && git push origin OpenWeatherApi && git subtree push --prefix dist src origin gh-pages",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "tsc": "tsc"
