@@ -16,12 +16,11 @@ export function renderWeather(current: WeatherCard, unitState: Units) {
   weatherIcon.src = iconPath + `${current.weather_icon}.svg`;
 
   currentCard.querySelector('#temp-output')!.innerHTML =
-    `${current.temp}` + printUnit(unitState) + '<h3 id="feels-like"></h3>';
+    `${current.temp}` + printUnit(unitState);
   currentCard.querySelector('#icon-ctr')!.prepend(weatherIcon);
-  currentCard.querySelector('#description-output')!.textContent =
-    `${current.weather_condition}`;
+
   currentCard.querySelector('#feels-like')!.innerHTML =
-    `feels like ${current.feels_like}` + printUnit(unitState);
+    `${current.feels_like}` + printUnit(unitState);
 
   //   today.appendChild(dailyCard);
 
@@ -35,3 +34,6 @@ export function renderWeather(current: WeatherCard, unitState: Units) {
 //     titleCtr.textContent = `${current.name} - ${current.dt.substring(4, 10)}`;
 //   }
 // }
+
+// currentCard.querySelector('#description-output')!.textContent =
+//     `${current.weather_condition}`;

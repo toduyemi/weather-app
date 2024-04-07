@@ -17,7 +17,7 @@ export function renderDailyCards(forecast: ForecastCard, unitState: Units) {
   for (const day in forecast) {
     const dailyCard = document.importNode(template.content, true);
 
-    const prop = forecast[day].weather as keyof typeof map;
+    const prop: keyof typeof map = forecast[day].weather;
     const weatherIcon = new Image();
     weatherIcon.src = iconPath + `${map[prop].image}.svg`;
     console.log(new Date(forecast[day].timestamp * 1000));

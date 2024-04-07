@@ -38,7 +38,10 @@ export function parseUnitState(flag: boolean) {
 }
 
 export function secondsToHHMM(seconds: number) {
-  if (seconds > 3600 || seconds < -3600) {
+  if (
+    (seconds >= 3600 || seconds <= -3600) &&
+    (seconds >= -90000 || seconds <= 90000)
+  ) {
     if (seconds > 0) {
       return '+' + new Date(seconds * 1000).toISOString().substring(11, 16);
     }

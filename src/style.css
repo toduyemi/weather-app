@@ -5,9 +5,9 @@
   padding: 0;
   /* border: 1px solid black; */
 }
-html {
+/* html {
   height: 100vh;
-}
+} */
 h1 {
   font-size: 1.5rem;
 }
@@ -19,20 +19,131 @@ h3 {
   font-size: 1.05rem;
 }
 body {
-  margin: 0.5rem;
-  height: 100%;
+  margin: 0 0.5rem;
+  height: 100vh;
   display: grid;
-  grid-template: 1fr 1fr 12fr/1fr 1fr 1fr;
+  grid-template: 1fr /1fr 5fr;
+}
+#side-panel {
+  grid-area: 1/1/2/2;
+  max-height: 100vh;
+  padding: 1rem;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr;
+}
+
+#main-panel {
+  grid-area: 1/2/2/3;
+
+  height: 100vh;
+  width: 100%;
 }
 header {
   grid-area: 1/1/2/4;
   display: flex;
+  justify-content: space-between;
 }
 
-/* unit toggle */
+header h1 {
+  align-self: center;
+}
+
+/* TOP PANEL */
+#top-panel {
+  display: grid;
+  grid-template: 1fr 8fr /1fr;
+}
+
+/* CURRENT-WEATHER */
+
+#current-ctr {
+  display: grid;
+  grid-template: 1fr 1fr 1.5fr/ 1fr 1fr;
+}
+
+#date-ctr {
+  grid-area: 1/1/2/3;
+  display: flex;
+  justify-content: space-between;
+}
+
+#current-ctr #icon-ctr {
+  grid-area: 2/1/3/2;
+  align-self: center;
+  height: 7rem;
+  width: 7rem;
+}
+
+#temp-output {
+  font-size: 4rem;
+  align-self: center;
+  grid-area: 2/2/3/3;
+}
+
+#feels-ctr {
+  grid-area: 3/1/4/3;
+  display: grid;
+  grid-template: 1fr 3fr/ 1fr;
+}
+#feels-ctr .row {
+  grid-area: 1/1/2/2;
+  display: flex;
+  align-items: center;
+}
+
+#feels-ctr h3 {
+}
+#feels-ctr img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+#feels-like {
+  grid-area: 2/1/3/2;
+  font-size: 2rem;
+}
+/*DAILY FORECAST*/
+
+#daily-forecast {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  grid-area: 2/1/3/2;
+}
+
+.card {
+  display: flex;
+}
+.daily-list {
+  /* height: 100%; */
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-row: 1fr;
+}
+
+.icon img {
+  height: 3rem;
+  width: 3rem;
+}
+
+/* SEARCH FORM  */
+#search-form {
+  grid-area: 1/1/2/2;
+  margin-bottom: 1%;
+}
+.ais-search-box {
+  max-width: none;
+}
+/* UNIT TOGGLE*/
+#toggle-ctr {
+  display: flex;
+}
+
+#toggle-ctr img {
+}
 .switch {
   position: relative;
   display: inline-flex;
+  align-self: center;
   align-items: center;
   width: 60px;
   height: 34px;
@@ -86,13 +197,6 @@ header {
   transform: translateX(26px);
 }
 
-#search-form {
-  grid-area: 2/1/3/4;
-
-  display: flex;
-  height: 85%;
-}
-
 input {
   font-size: 1.5rem;
   width: 80%;
@@ -116,87 +220,66 @@ button {
   grid-area: 3/1/4/4;
   display: grid;
 
-  grid-template: 0.5fr 2fr 8fr/1fr 1fr 1fr;
+  grid-template: 0.8fr 1fr 1fr 1fr / 1fr 1fr 1fr;
 }
-
-#date-ctr {
-  width: 80%;
-  grid-area: 1 / 1/ 2/2;
+/* WEATHER HIGHLIGHTS  */
+#current-highlights {
+  grid-area: 2/1/3/3;
+  display: flex;
 }
-/* forecast container output */
-#current-ctr {
-  grid-area: 2/3/3/4;
+#current-highlights ul {
   display: grid;
-  grid-template: 1fr /1fr 1fr;
+  grid-template: 1fr 1fr / repeat(4, 1fr);
+  align-self: center;
 }
 
-#temp-output {
-  font-size: 5rem;
-  align-self: center;
-  grid-area: 1/1/2/2;
+#current-highlights li {
+  display: grid;
+  grid-template: 1fr 1fr/1fr 3fr;
+}
+#current-highlights label {
+  font-size: 0.9rem;
+}
+#current-highlights img {
+  height: 3rem;
+  width: 3rem;
+  grid-area: 1/1/3/2;
 }
 
 #description-output {
   font-size: 2rem;
   margin-left: 3rem;
 }
-#feels-like {
-  /* grid-area: 2/1/3/2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around; */
-}
-
-#current-ctr #icon-ctr {
-  grid-area: 1/2/2/3;
-  align-self: center;
-}
-
-/*daily forecast styling*/
-
-#daily-forecast {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  grid-area: 1/2/2/4;
-}
-
-.daily-list {
-  /* height: 100%; */
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-}
 
 #charts-ctr {
-  grid-area: 3/1/4/4;
+  grid-area: 3/1/5/4;
+  height: 100%;
+  width: 100%;
 }
 
 .chart-ctr {
   border: none;
-  width: 800px;
+  width: 90%;
   display: flex;
+  height: 100%;
 }
 
 .colSmall {
   border: none;
-  width: 28px;
+
+  width: 35px;
 }
 
 .colLarge {
   border: none;
-  max-width: 800px;
+  max-width: 100%;
   overflow-x: scroll;
 }
 .box {
   border: none;
-  width: calc(2200px - 28px);
-  height: 500px;
+  width: calc(1000px - 28px);
+  height: 100%;
 }
 canvas {
   border: none;
-}
-.icon img {
-  height: 3rem;
-  width: 3rem;
 }

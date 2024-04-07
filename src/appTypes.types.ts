@@ -69,6 +69,25 @@ export enum Units {
   imperial = 'imperial',
 }
 
+export enum compassSector {
+  N,
+  NNE,
+  NE,
+  ENE,
+  E,
+  ESE,
+  SE,
+  SSE,
+  S,
+  SSW,
+  SW,
+  WSW,
+  W,
+  WNW,
+  NW,
+  NNW,
+}
+
 export type CitiesObj = {
   label: {
     name: string;

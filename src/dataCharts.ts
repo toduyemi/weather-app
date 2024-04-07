@@ -2,11 +2,12 @@ import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { enUS } from 'date-fns/locale';
-import { ForecastObj } from './appTypes.types';
+import { ForecastObj, Units } from './appTypes.types';
+import { printUnit } from './controller';
 
 //chart 1 ===================>
 let chart1: Chart, chart2: Chart;
-export async function renderChart(forecast: ForecastObj[]) {
+export async function renderChart(forecast: ForecastObj[], unitState: Units) {
   const getMaxValueWithPadding = () => {
     return (
       Math.max(...forecast.map((row) => (row.rain ?? 0) + (row.snow ?? 0))) *
@@ -67,7 +68,7 @@ export async function renderChart(forecast: ForecastObj[]) {
           border: {
             display: false,
           },
-          min: 0,
+          suggestedMin: 0,
         },
         yPop: {
           display: false,
@@ -181,12 +182,15 @@ export async function renderChart(forecast: ForecastObj[]) {
         },
         y: {
           afterFit: (ctx) => {
-            ctx.width = 35;
+            ctx.width = 43;
           },
           ticks: {
-            callback: (value) => `${value} C`,
+            callback: (value) => {
+              if (unitState == Units.metric) return `${value}\u00B0C`;
+              else return `${value}\u00B0F`;
+            },
           },
-          min: 0,
+          suggestedMin: 0,
         },
       },
     },

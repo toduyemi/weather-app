@@ -20,6 +20,7 @@ import { GeoDBCityResponse } from './geoDB.types';
 import { autoSearch } from './autocomplete';
 import { getElement, parseUnitState, updateDateTime } from './controller';
 import { renderQueryTitle } from './date-time';
+import { renderHighlights } from './highlights';
 
 /*
 -basic async function to hit api and return data of interest
@@ -175,11 +176,12 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   const forecastArr: ForecastObj[] = createForecastArr(responseFore);
   console.log(responseFore);
 
-  renderChart(forecastArr);
+  renderChart(forecastArr, unitState);
   const daily = parse5DayForecast(forecastArr);
 
   const today = parseCurrentWeather(responseWeath, responseFore);
+  renderWeather(today, unitState);
+  // renderHighlights(today);
   renderQueryTitle(today);
   renderDailyCards(daily, unitState);
-  renderWeather(today, unitState);
 }

@@ -8,37 +8,42 @@
 </head>
 
 <body>
-  <header>
-    <h1>get yo weather</h1>
-    <h1 id="user-date"></h1>
-    <label for="unit-toggle" class="switch">
-      <input id="unit-toggle" type="checkbox">
-      <span class="slider"></span>
-    </label>
-  </header>
-  <div id="search-form" type="text" placeholder="Location/City..."></div>
-  <!-- <form id="search-form" class="info-ctr">
-    <div id="city-input" type="text" placeholder="Location/City..."></div>
-    <button><svg viewBox="0 0 1024 1024">
-        <path class="path1"
-          d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
-        </path>
-      </svg></button>
-  </form> -->
 
-  <div id="output-overlay">
-    <section id="date-ctr">
-      <h2 id="local-date"></h2>
-      <h2 id="location"></h2>
+  <section id="side-panel">
+    <section id="top-panel">
+      <div id="search-form"></div>
+      <section id="current-ctr">
+      </section>
     </section>
     <section id="daily-forecast">
-      cards of data
-
-    </section>
-    <section id="current-ctr">
 
 
     </section>
+  </section>
+
+  <section id="main-panel">
+    <header>
+      <h1>get yo weather</h1>
+      <h1 id="user-date"></h1>
+      <div id="toggle-ctr">
+        <img src="./static/assets/weather-icons-master/production/line/all/celsius.svg" alt="Celsius" srcset="">
+        <label for="unit-toggle" class="switch">
+          <input id="unit-toggle" type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <img src="./static/assets/weather-icons-master/production/line/all/fahrenheit.svg" alt="Fahrenheit" srcset="">
+      </div>
+    </header>
+
+    <section id="current-conditions">
+      <!-- <div id="panel">
+        <h2 id="local-date"></h2>
+        <h2 id="location"></h2>
+      </div>
+      <section id="current-highlights"></section> -->
+    </section>
+
+
 
     <section id="charts-ctr">
       <div class="chart-ctr">
@@ -51,58 +56,100 @@
           </div>
         </div>
       </div>
-
     </section>
-  </div>
+  </section>
 
   <template id="daily-template">
     <li>
       <div class="card">
-        <div class="date"></div>
-        <div class="icon"></div>
-        <div class="description"></div>
-        <div class="high"></div>
-        <div class="low"></div>
+
+        <output class="icon"></output>
+        <div class="col">
+          <output class="description"></output>
+          <output class="date"></output>
+        </div>
+        <div class="col">
+          <output class="high"></output>
+          <output class="low"></output>
+        </div>
       </div>
     </li>
   </template>
 
-  <template id="current-template">
-
-    <div id="temp-output">
-    </div>
-    <div id="icon-ctr">
-      <h3 id="description-output"></h3>
-    </div>
-
-
-
+  <template id="conditions">
+    <h3>Current conditions</h3>
+    <h3 id="description-output"></h3>
   </template>
 
+  <template id="current-template">
+    <section id="date-ctr">
+      <h2 id="location"></h2>
+      <h2 id="local-date"></h2>
+    </section>
+    <div id="icon-ctr">
+    </div>
+    <output id="temp-output">
+    </output>
+    <div id="feels-ctr">
+      <div class="row">
+        <img src="./static/assets/weather-icons-master/production/line/all/thermometer.svg" alt="">
+        <h3>Feels like</h3>
+      </div>
+      <h2 id="feels-like">
+      </h2>
+    </div>
+  </template>
+
+
   <template id="daily-statistics">
-    <li class="stat-card" id="sunrise">
+    <li>
       <img src="./static/assets/weather-icons-master/production/line/all/sunrise.svg" alt="">
+      <label for="sunrise">Sunrise</label>
+      <output class="stat-card" id="sunrise">
+
+      </output>
     </li>
-    <li class="stat-card" id="sunset">
+    <li>
       <img src="./static/assets/weather-icons-master/production/line/all/sunset.svg" alt="">
+      <label for="sunset">Sunset</label>
+      <output class="stat-card" id="sunset">
+      </output>
     </li>
-    <li class="stat-card" id="humidity">
-      <img src="./static/assets/weather-icons-master/production/line/all/humidity.svg" alt="">
+    <li>
+      <img src="./static/assets/weather-icons-master/production/line/all/raindrop.svg" alt="">
+      <label for="humidity">Humidity</label>
+      <output class="stat-card" id="humidity">
+      </output>
     </li>
-    <li class="stat-card" id="pressure">
+    <li>
       <img src="./static/assets/weather-icons-master/production/line/all/barometer.svg" alt="">
+      <label for="Pressure">Pressure</label>
+      <output class="stat-card" id="pressure">
+      </output>
     </li>
-    <li class="stat-card" id="windspeed">
+    <li>
       <img src="./static/assets/weather-icons-master/production/line/all/wind-beaufort-4.svg" alt="">
+      <label for="wind">Wind</label>
+      <output class="stat-card" id="windspeed">
+      </output>
     </li>
-    <li class="stat-card" id="precipitation">
-      <img src="./static/assets/weather-icons-master/production/line/all/.svg" alt="">
-    </li>
-    <li class="stat-card" id="pop">
+    <li>
       <img src="./static/assets/weather-icons-master/production/line/all/raindrop-measure.svg" alt="">
+      <label for="precipitation">Precipitation</label>
+      <output class="stat-card" id="precipitation">
+      </output>
     </li>
-    <li class="stat-card" id="visibility">
-      <img src="./static/assets/weather-icons-master/production/line/all/haze.svg" alt="">
+    <li>
+      <img src="./static/assets/weather-icons-master/production/line/all/humidity.svg" alt="">
+      <label for="pop">Chance of precipitation</label>
+      <output class="stat-card" id="pop">
+      </output>
+    </li>
+    <li>
+      <img src="./static/assets/weather-icons-master/production/line/all/uv-index.svg" alt="">
+      <label for="uv">UV Index</label>
+      <output class="stat-card" id="uv">
+      </output>
     </li>
   </template>
 </body>
