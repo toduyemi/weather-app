@@ -1,7 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const dotEnv = require('dotenv-webpack');
+const DotEnv = require('dotenv-webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'source', to: 'dest' },
+        { from: 'other', to: 'public' },
+      ],
+    }),
+  ],
+};
 module.exports = {
   entry: {
     index: './src/index.ts',
@@ -37,6 +48,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/app.html'),
     }),
-    new dotEnv(),
+    new DotEnv(),
+    new CopyPlugin({
+      patterns: [
+        { from: 'static', to: 'dist' },
+        { from: 'other', to: 'public' },
+      ],
+    }),
   ],
 };
