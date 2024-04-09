@@ -27,7 +27,7 @@ export function renderDailyCards(forecast: ForecastCard, unitState: Units) {
     dailyCard.querySelector('.date')!.textContent = formatInTimeZone(
       forecast[day].timestamp * 1000,
       secondsToHHMM(forecast[day].timezone_offset),
-      'iiii',
+      'iiii, MMMM d',
     );
     dailyCard.querySelector('.icon')!.appendChild(weatherIcon);
     dailyCard.querySelector('.description')!.textContent = map[prop].label;

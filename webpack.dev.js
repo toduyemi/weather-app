@@ -10,6 +10,6 @@ module.exports = merge(common, {
     hot: true,
     liveReload: false,
 
-    // watchFiles: ['src/*.html'],
+    watchFiles: ['src/*.html'],
   },
 });
