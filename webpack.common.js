@@ -49,11 +49,5 @@ module.exports = {
       template: path.resolve(__dirname, './src/app.html'),
     }),
     new DotEnv(),
-    new CopyPlugin({
-      patterns: [
-        { from: 'static', to: 'dist' },
-        { from: 'other', to: 'public' },
-      ],
-    }),
   ],
 };

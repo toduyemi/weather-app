@@ -180,7 +180,10 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   const daily = parse5DayForecast(forecastArr);
 
   const today = parseCurrentWeather(responseWeath, responseFore);
-  renderWeather(today, unitState);
+  if (coord.country) {
+    renderWeather(today, coord.country, unitState);
+  }
+
   // renderHighlights(today);
   renderQueryTitle(today);
   renderDailyCards(daily, unitState);

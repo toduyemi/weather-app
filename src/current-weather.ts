@@ -1,8 +1,13 @@
 import { iconPath } from '.';
 import { Units, WeatherCard } from './appTypes.types';
 import { getElement, printUnit } from './controller';
+import { GeoDBCityResponse } from './geoDB.types';
 
-export function renderWeather(current: WeatherCard, unitState: Units) {
+export function renderWeather(
+  current: WeatherCard,
+  country: string,
+  unitState: Units,
+) {
   // renderTitle(current);
 
   const template: HTMLTemplateElement = getElement(
@@ -11,7 +16,8 @@ export function renderWeather(current: WeatherCard, unitState: Units) {
   );
 
   const currentCard = document.importNode(template.content, true);
-
+  currentCard.querySelector('#location')!.textContent = `${current.name}, \r\n`;
+  currentCard.querySelector('#location')!.textContent += `${country}`;
   const weatherIcon = new Image();
   weatherIcon.src = iconPath + `${current.weather_icon}.svg`;
 

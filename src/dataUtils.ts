@@ -82,8 +82,8 @@ export function parseCurrentWeather(
     weather_main: response.current.weather[0].main,
     weather_icon: response.current.weather[0].icon,
     dt: response.current.dt,
-    temp: (Math.round(response.current.temp * 2) / 2).toFixed(1),
-    feels_like: (Math.round(response.current.feels_like * 2) / 2).toFixed(1),
+    temp: (Math.round(response.current.temp * 2) / 2).toFixed(),
+    feels_like: (Math.round(response.current.feels_like * 2) / 2).toFixed(),
     timezone: response.timezone,
     country: foreResponse.city.country,
     highlights: {

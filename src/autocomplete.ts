@@ -81,7 +81,11 @@ export async function autoSearch() {
           },
           onSelect({ item }: { item: CitiesObj }) {
             //update state of current place of interest
-            currentCoord = { lat: item.coord.lat, lon: item.coord.lon };
+            currentCoord = {
+              lat: item.coord.lat,
+              lon: item.coord.lon,
+              country: item.label.country,
+            };
             refreshPage(currentCoord, unitToggle.checked);
           },
         },
