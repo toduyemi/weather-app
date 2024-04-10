@@ -14,7 +14,7 @@ import { CitiesObj, Coordinates, ForecastObj, Units } from './appTypes.types';
 
 import './style.css';
 import { renderDailyCards } from './daily-forecast';
-import { renderWeather } from './current-weather';
+import { renderConditionsTitle, renderWeather } from './current-weather';
 import { renderChart } from './dataCharts';
 import { GeoDBCityResponse } from './geoDB.types';
 import { autoSearch } from './autocomplete';
@@ -183,8 +183,8 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   if (coord.country) {
     renderWeather(today, coord.country, unitState);
   }
-
-  // renderHighlights(today);
+  renderConditionsTitle(today);
+  renderHighlights(today);
   renderQueryTitle(today);
   renderDailyCards(daily, unitState);
 }

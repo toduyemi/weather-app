@@ -39,7 +39,7 @@ export function renderHighlights(current: WeatherCard) {
 
   highlightCard.querySelector('#uv')!.textContent = `${current.highlights.uvi}`;
   highlights.appendChild(highlightCard);
-  getElement('#current-highlights', HTMLElement).replaceChildren(highlights);
+  getElement('#highlights', HTMLElement).replaceChildren(highlights);
 }
 
 function toCompass(degree: number) {

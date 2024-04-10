@@ -9,55 +9,46 @@
 
 <body>
 
-  <section id="side-panel">
-    <section id="top-panel">
-      <div id="search-form"></div>
-      <section id="current-ctr">
+  <main>
+    <section id="side-panel">
+      <section id="top-panel">
+        <div id="search-form"></div>
+        <section id="current-ctr">
+        </section>
+      </section>
+      <section id="daily-forecast">
       </section>
     </section>
-    <section id="daily-forecast">
-
-
-    </section>
-  </section>
-
-  <section id="main-panel">
-    <header>
-      <h1>get yo weather</h1>
-      <h1 id="user-date"></h1>
-      <div id="toggle-ctr">
-        <img src="./static/assets/weather-icons-master/production/line/all/celsius.svg" alt="Celsius" srcset="">
-        <label for="unit-toggle" class="switch">
-          <input id="unit-toggle" type="checkbox">
-          <span class="slider"></span>
-        </label>
-        <img src="./static/assets/weather-icons-master/production/line/all/fahrenheit.svg" alt="Fahrenheit" srcset="">
-      </div>
-    </header>
-
-    <section id="current-conditions">
-      <!-- <div id="panel">
-        <h2 id="local-date"></h2>
-        <h2 id="location"></h2>
-      </div>
-      <section id="current-highlights"></section> -->
-    </section>
-
-
-
-    <section id="charts-ctr">
-      <div class="chart-ctr">
-        <div class="colSmall">
-          <canvas id="temp-chart2"></canvas>
+    <section id="main-panel">
+      <header>
+        <h1>get yo weather</h1>
+        <h1 id="user-date"></h1>
+        <div id="toggle-ctr">
+          <img src="./static/assets/weather-icons-master/production/line/all/celsius.svg" alt="Celsius" srcset="">
+          <label for="unit-toggle" class="switch">
+            <input id="unit-toggle" type="checkbox">
+            <span class="slider"></span>
+          </label>
+          <img src="./static/assets/weather-icons-master/production/line/all/fahrenheit.svg" alt="Fahrenheit" srcset="">
         </div>
-        <div class="colLarge">
-          <div class="box">
-            <canvas id="temp-chart1"></canvas>
+      </header>
+      <section id="current-conditions">
+      </section>
+      <section id="highlights"></section>
+      <section id="charts-ctr">
+        <div class="chart-ctr">
+          <div class="colSmall">
+            <canvas id="temp-chart2"></canvas>
+          </div>
+          <div class="colLarge">
+            <div class="box">
+              <canvas id="temp-chart1"></canvas>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </section>
-  </section>
+  </main>
 
   <template id="daily-template">
     <li>
@@ -76,12 +67,12 @@
     </li>
   </template>
 
-  <template id="conditions">
-    <h3>Current conditions</h3>
+  <template id="current-template">
+    <h2>Current conditions</h2>
     <h3 id="description-output"></h3>
   </template>
 
-  <template id="current-template">
+  <template id="weather-template">
     <section id="date-ctr">
       <h2 id="location"></h2>
       <div class="date-time-ctr">

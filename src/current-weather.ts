@@ -8,10 +8,8 @@ export function renderWeather(
   country: string,
   unitState: Units,
 ) {
-  // renderTitle(current);
-
   const template: HTMLTemplateElement = getElement(
-    '#current-template',
+    '#weather-template',
     HTMLTemplateElement,
   );
 
@@ -33,13 +31,18 @@ export function renderWeather(
   document.querySelector('#current-ctr')?.replaceChildren(currentCard);
 }
 
-// export function renderTitle(current: WeatherCard) {
-//   const titleCtr = document.querySelector('#output-title');
+export function renderConditionsTitle(current: WeatherCard) {
+  const template: HTMLTemplateElement = getElement(
+    '#current-template',
+    HTMLTemplateElement,
+  );
 
-//   if (titleCtr) {
-//     titleCtr.textContent = `${current.name} - ${current.dt.substring(4, 10)}`;
-//   }
-// }
+  const currentCard = document.importNode(template.content, true);
+  currentCard.querySelector('#description-output')!.textContent =
+    current.weather_condition;
+
+  getElement('#current-conditions', HTMLElement).replaceChildren(currentCard);
+}
 
 // currentCard.querySelector('#description-output')!.textContent =
 //     `${current.weather_condition}`;

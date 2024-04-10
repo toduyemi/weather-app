@@ -3,7 +3,7 @@ import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { enUS } from 'date-fns/locale';
 import { ForecastObj, Units } from './appTypes.types';
-import { printUnit } from './controller';
+import { getElement, printUnit } from './controller';
 
 //chart 1 ===================>
 let chart1: Chart, chart2: Chart;
@@ -205,3 +205,4 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
     },
   });
 }
+const box = getElement('.box', HTMLDivElement);
