@@ -14,6 +14,8 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
       1.1
     );
   };
+
+  Chart.defaults.color = 'rgba(255, 255, 255, 0.8)';
   const chartCtr = document.querySelector('#temp-chart1') as HTMLCanvasElement;
   if (chart1) chart1.destroy();
   if (chart2) chart2.destroy();
@@ -27,7 +29,6 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
           bottom: 47.15,
         },
       },
-
       maintainAspectRatio: false,
       animation: false,
       plugins: {
@@ -95,20 +96,29 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
           type: 'line',
           label: 'temp every 3 hrs',
           data: forecast.map((row) => row.temp),
+          tension: 0.4,
+          pointStyle: 'rectRounded',
           yAxisID: 'yTemp',
           datalabels: {
             display: false,
           },
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          borderColor: 'rgba(255, 255, 255, 0.4)',
         },
         {
           label: '3h rain level',
+          type: 'bar',
           data: forecast.map((row) => {
             return (row.rain ?? 0) + (row.snow ?? 0);
 
             // return 0;
           }),
           yAxisID: 'yPop',
-          type: 'bar',
+          backgroundColor: 'rgba(151,187,205,0.5)',
+          borderColor: 'rgba(151,187,205,0.8)',
+          borderWidth: 1.5,
+          borderRadius: 4,
+
           datalabels: {
             labels: {
               description: {
@@ -205,4 +215,15 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
     },
   });
 }
-const box = getElement('.box', HTMLDivElement);
+function hexToRGB(hex: string, alpha: number) {
+  var r = parseInt(hex.slice(1, 3), 16),
+    g = parseInt(hex.slice(3, 5), 16),
+    b = parseInt(hex.slice(5, 7), 16);
+
+  if (alpha) {
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+  }
+  else {
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  }
+}

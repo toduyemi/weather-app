@@ -1,7 +1,7 @@
 //@ts-ignore
 import autoComplete from '@tarekraafat/autocomplete.js';
 import { autocomplete } from '@algolia/autocomplete-js';
-import '@algolia/autocomplete-theme-classic';
+
 import { CitiesObj, Coordinates } from './appTypes.types';
 import { fetchCities, refreshPage } from '.';
 import type {

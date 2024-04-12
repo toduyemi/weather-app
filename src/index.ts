@@ -12,16 +12,16 @@ import {
 } from './openWeather.types';
 import { CitiesObj, Coordinates, ForecastObj, Units } from './appTypes.types';
 
-import './style.css';
 import { renderDailyCards } from './daily-forecast';
 import { renderConditionsTitle, renderWeather } from './current-weather';
 import { renderChart } from './dataCharts';
 import { GeoDBCityResponse } from './geoDB.types';
 import { autoSearch } from './autocomplete';
+import '@algolia/autocomplete-theme-classic';
 import { getElement, parseUnitState, updateDateTime } from './controller';
 import { renderQueryTitle } from './date-time';
 import { renderHighlights } from './highlights';
-
+import './style.css';
 /*
 -basic async function to hit api and return data of interest
 -use url object methods to manipulate the sort of data returned
