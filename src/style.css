@@ -8,7 +8,7 @@
   --temp-font-colour: rgba(255, 255, 255, 1);
   --font-outline-colour: rgba(0, 0, 0, 0.4);
   /* --search-colour: rgba(255, 255, 255, 0.01); */
-
+  --aa-muted-color-rgb: rgb(255, 255, 255);
   --panel-background: rgba(255, 255, 255, 0.2);
   --aa-background-color-alpha: 0.9;
   --aa-input-background-color-alpha: 0.3;
@@ -43,15 +43,15 @@ h3 {
 }
 
 body {
-  margin: 0 0.5rem;
+  margin: auto;
+  padding-top: 30px;
   height: 100vh;
   background-image: url('./static/assets/images/pexels-pixabay-209831.jpg');
   background-size: 100%;
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
-  position: relative;
+  /* position: relative; */
   z-index: 10;
-  display: flex;
 
   font-family: 'Poppins', sans-serif;
 }
@@ -66,7 +66,7 @@ main {
   display: grid;
   gap: 2%;
   grid-template: minmax(auto, 100%) / 1fr 5fr;
-  align-self: center;
+
   padding: 1rem;
   border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 25px;
