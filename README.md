@@ -14,11 +14,14 @@
 
 # features
 
-- search cities and postal code worldwide
+- search for cities worldwide
 - select city from auto-complete dropdown
 - display current forecast
 - display 5 day forecast along with highs and lows
 - display chart of 5 day forecast with 3hr step
+- highlights of current weather
+- animated icons
+- wind speed icon displays beaufort scale calculation
 
 # Built with
 
@@ -28,3 +31,7 @@
 - Webpack
 - Chart.js
 - Algolia Autocomplete
+
+# Next steps
+
+- Add dynamic background based on conditions
