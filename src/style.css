@@ -293,11 +293,11 @@ output:is(.high, .low) {
 }
 
 #unit-toggle:checked + .slider {
-  background-color: #2196f3;
+  background-color: #2379c083;
 }
 
 #unit-toggle:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px #2379c083;
 }
 
 #unit-toggle:checked + .slider:before {

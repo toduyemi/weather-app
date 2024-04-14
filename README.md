@@ -1,4 +1,4 @@
-# weather-app
+# [get yo weather](https://toduyemi.github.io/weather-app/)
 
 # learning goals
 
@@ -20,6 +20,11 @@
 - display 5 day forecast along with highs and lows
 - display chart of 5 day forecast with 3hr step
 
-# getting started
+# Built with
 
-## Running from source code/locally
+- Typescript
+- GeoDBCities API
+- OpenWeather API
+- Webpack
+- Chart.js
+- Algolia Autocomplete

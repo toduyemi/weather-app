@@ -135,7 +135,7 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
     units: unitUrl,
   });
   const forecastArr: ForecastObj[] = createForecastArr(responseFore);
-  console.log(responseFore);
+  console.log(responseWeath);
 
   renderChart(forecastArr, unitState);
   const daily = parse5DayForecast(forecastArr);
@@ -145,7 +145,7 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
     renderWeather(today, coord.country, unitState);
   }
   renderConditionsTitle(today);
-  renderHighlights(today);
+  renderHighlights(today, unitState);
   renderQueryTitle(today);
   renderDailyCards(daily, unitState);
 }

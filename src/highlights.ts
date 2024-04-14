@@ -1,9 +1,9 @@
-import { WeatherCard, compassSector } from './appTypes.types';
-import { convertToBeaufort } from './beaufort';
-import { getElement } from './controller';
+import { Units, WeatherCard, compassSector } from './appTypes.types';
+import { convertToBeaufort, mpsToKmh } from './beaufort';
+import { getElement, printSpeedUnit } from './controller';
 import { formatInTimeZone } from 'date-fns-tz';
 
-export function renderHighlights(current: WeatherCard) {
+export function renderHighlights(current: WeatherCard, unitState: Units) {
   const template: HTMLTemplateElement = getElement(
     '#daily-statistics',
     HTMLTemplateElement,
@@ -31,10 +31,15 @@ export function renderHighlights(current: WeatherCard) {
   (highlightCard.querySelector('#beaufort') as HTMLImageElement).src =
     `./static/assets/weather-icons-master/production/line/all/wind-beaufort-${convertToBeaufort(
       current.highlights.wind_speed,
+      unitState,
     )}.svg`;
 
-  highlightCard.querySelector('#windspeed')!.textContent =
-    `${current.highlights.wind_speed}km/h `;
+  // ternary condition to check unit state, if metric convert mps to kmh and then print unit
+  highlightCard.querySelector('#windspeed')!.textContent = `${
+    unitState === Units.metric
+      ? mpsToKmh(current.highlights.wind_speed).toFixed(2)
+      : current.highlights.wind_speed
+  }${printSpeedUnit(unitState)} `;
 
   highlightCard.querySelector('#precipitation')!.textContent = `${
     (current.highlights.rain ?? 0) + (current.highlights.snow ?? 0)

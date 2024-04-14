@@ -27,9 +27,14 @@ export function getElement<
   return el;
 }
 
-export function printUnit(unitState: Units) {
+export function printTempUnit(unitState: Units) {
   if (unitState == Units.metric) return '&deg;C';
   else return '&deg;F';
+}
+
+export function printSpeedUnit(unitState: Units) {
+  if (unitState == Units.metric) return 'km/h';
+  else return 'mph';
 }
 
 export function parseUnitState(flag: boolean) {

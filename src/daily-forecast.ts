@@ -1,6 +1,6 @@
 import { iconPath } from '.';
 import { ForecastCard, JSONMap, Units } from './appTypes.types';
-import { printUnit, secondsToHHMM } from './controller';
+import { printTempUnit, secondsToHHMM } from './controller';
 import * as openWeather from './openWeatherIcons.json';
 import { formatInTimeZone } from 'date-fns-tz';
 
@@ -33,10 +33,10 @@ export function renderDailyCards(forecast: ForecastCard, unitState: Units) {
     dailyCard.querySelector('.description')!.textContent = map[prop].label;
     dailyCard.querySelector('.high')!.innerHTML = `${
       forecast[day].temp_high
-    }${printUnit(unitState)}`;
+    }${printTempUnit(unitState)}`;
     dailyCard.querySelector('.low')!.innerHTML = `${
       forecast[day].temp_low
-    }${printUnit(unitState)}`;
+    }${printTempUnit(unitState)}`;
 
     daily.appendChild(dailyCard);
   }

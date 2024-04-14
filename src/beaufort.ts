@@ -1,14 +1,33 @@
+import { Units } from './appTypes.types';
+
 const kmhBoundaries = [
-  1, 6, 11, 19, 30, 39, 50, 61, 74, 87, 102, 117, 177, 249, 332, 418, 512,
+  2, 6, 12, 20, 29, 39, 50, 62, 75, 89, 103, 118, 133, 149, 166, 184, 201,
 ];
 
-export function convertToBeaufort(speed: number) {
+const mphBoundaries = [
+  1, 4, 8, 13, 19, 25, 32, 39, 47, 55, 64, 73, 83, 93, 104, 115, 125,
+];
+
+export function convertToBeaufort(speed: number, unitState: Units) {
   if (speed < 0) {
     throw new Error('Invalid speed value');
   }
-  const beaufort = kmhBoundaries.reduce((acc, curr) => {
-    return acc + (speed > curr ? 1 : 0);
-  }, 0);
+  let beaufort;
+  if (unitState == Units.metric) {
+    speed = mpsToKmh(speed);
+    beaufort = kmhBoundaries.reduce((acc, curr) => {
+      return acc + (speed >= curr ? 1 : 0);
+    }, 0);
+  }
+  else {
+    beaufort = mphBoundaries.reduce((acc, curr) => {
+      return acc + (speed > curr ? 1 : 0);
+    }, 0);
+  }
 
   return beaufort;
+}
+
+export function mpsToKmh(speed: number) {
+  return 3.6 * speed;
 }

@@ -1,6 +1,6 @@
 import { iconPath } from '.';
 import { Units, WeatherCard } from './appTypes.types';
-import { getElement, printUnit } from './controller';
+import { getElement, printTempUnit } from './controller';
 import { GeoDBCityResponse } from './geoDB.types';
 
 export function renderWeather(
@@ -20,11 +20,11 @@ export function renderWeather(
   weatherIcon.src = iconPath + `${current.weather_icon}.svg`;
 
   currentCard.querySelector('#temp-output')!.innerHTML =
-    `${current.temp}` + printUnit(unitState);
+    `${current.temp}` + printTempUnit(unitState);
   currentCard.querySelector('#icon-ctr')!.prepend(weatherIcon);
 
   currentCard.querySelector('#feels-like')!.innerHTML =
-    `${current.feels_like}` + printUnit(unitState);
+    `${current.feels_like}` + printTempUnit(unitState);
 
   //   today.appendChild(dailyCard);
 
