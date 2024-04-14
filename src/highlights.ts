@@ -1,4 +1,5 @@
 import { WeatherCard, compassSector } from './appTypes.types';
+import { convertToBeaufort } from './beaufort';
 import { getElement } from './controller';
 import { formatInTimeZone } from 'date-fns-tz';
 
@@ -26,6 +27,11 @@ export function renderHighlights(current: WeatherCard) {
 
   highlightCard.querySelector('#pressure')!.textContent =
     `${current.highlights.pressure}hPa`;
+
+  (highlightCard.querySelector('#beaufort') as HTMLImageElement).src =
+    `./static/assets/weather-icons-master/production/line/all/wind-beaufort-${convertToBeaufort(
+      current.highlights.wind_speed,
+    )}.svg`;
 
   highlightCard.querySelector('#windspeed')!.textContent =
     `${current.highlights.wind_speed}km/h `;

@@ -118,48 +118,9 @@ export async function fetchCities(query: string): Promise<CitiesObj[]> {
   });
 }
 
-let city = 'london';
-
-let coord = {
-  lat: '44.34',
-  lon: '10.99',
-};
-
-// const geodb = await fetchCities('Lon');
-// console.log(geodb);
-
-// const geo = await fetchData<GeoCityResponse[]>({
-//   url: url.geo(city),
-//   units: url.units(),
-// });
-// console.log(geo);
-
 setInterval(updateDateTime, 1000);
 
 autoSearch();
-// const responseFore = await fetchData<ForecastResponse>({
-//   url: url.forecast(getCoord(geo)),
-//   units: url.units(),
-// });
-
-// const responseWeath = await fetchData<WeatherResponse>({
-//   url: url.weather(getCoord(geo)),
-//   units: url.units(),
-// });
-
-// console.log(responseFore);
-
-// console.log(responseWeath);
-// const forecastArr = createForecastArr(responseFore);
-// renderChart(forecastArr);
-// const daily = parse5DayForecast(forecastArr);
-
-// const today = parseCurrentWeather(responseWeath);
-// console.log(today);
-
-// renderDailyCards(daily);
-// renderWeather(today);
-// console.log(parse5DayForecast(forecastArr));
 
 export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
   const unitState = parseUnitState(unitFlag);
