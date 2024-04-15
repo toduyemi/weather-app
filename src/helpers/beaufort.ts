@@ -1,4 +1,4 @@
-import { Units } from './appTypes.types';
+import { Units } from '../types/appTypes.types';
 
 const kmhBoundaries = [
   2, 6, 12, 20, 29, 39, 50, 62, 75, 89, 103, 118, 133, 149, 166, 184, 201,

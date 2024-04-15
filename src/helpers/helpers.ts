@@ -1,31 +1,5 @@
-import { Units } from './appTypes.types';
-
-class App {
-  unitToggle: HTMLInputElement;
-  unitState: boolean;
-  constructor() {
-    this.unitToggle = getElement('#unit-toggle', HTMLInputElement);
-    this.unitState = this.unitToggle.checked;
-    this.unitToggleInit();
-  }
-
-  unitToggleInit() {
-    this.unitToggle.addEventListener('change,', (e) => {
-      this.unitState = this.unitToggle.checked;
-    });
-  }
-}
-
-export function getElement<
-  ElConstuctor extends new (...params: any[]) => HTMLElement,
->(selector: string, type: ElConstuctor): InstanceType<ElConstuctor> {
-  const el = document.querySelector<InstanceType<ElConstuctor>>(selector);
-
-  if (!(el instanceof type)) {
-    throw new Error('Element does not exist');
-  }
-  return el;
-}
+import { getElement } from '../utilities/typeUtility';
+import { Units } from '../types/appTypes.types';
 
 export function printTempUnit(unitState: Units) {
   if (unitState == Units.metric) return '&deg;C';

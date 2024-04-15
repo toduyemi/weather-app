@@ -1,6 +1,7 @@
-import { Units, WeatherCard, compassSector } from './appTypes.types';
-import { convertToBeaufort, mpsToKmh } from './beaufort';
-import { getElement, printSpeedUnit } from './controller';
+import { Units, WeatherCard, compassSector } from '../types/appTypes.types';
+import { convertToBeaufort, mpsToKmh } from '../helpers/beaufort';
+import { printSpeedUnit } from '../helpers/helpers';
+import { getElement } from '../utilities/typeUtility';
 import { formatInTimeZone } from 'date-fns-tz';
 
 export function renderHighlights(current: WeatherCard, unitState: Units) {
@@ -51,8 +52,4 @@ export function renderHighlights(current: WeatherCard, unitState: Units) {
   highlightCard.querySelector('#uv')!.textContent = `${current.highlights.uvi}`;
   highlights.appendChild(highlightCard);
   getElement('#highlights', HTMLElement).replaceChildren(highlights);
-}
-
-function toCompass(degree: number) {
-  return compassSector[+(degree / 22.5).toFixed(0)];
 }

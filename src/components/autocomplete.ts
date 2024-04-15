@@ -1,36 +1,11 @@
 //@ts-ignore
-import autoComplete from '@tarekraafat/autocomplete.js';
 import { autocomplete } from '@algolia/autocomplete-js';
 
-import { CitiesObj, Coordinates } from './appTypes.types';
-import { fetchCities, refreshPage } from '.';
-import type {
-  InternalAutocompleteSource,
-  AutocompleteSource,
-  AutocompleteState,
-} from '@algolia/autocomplete-js';
-import { getElement } from './controller';
-
-// export async function autoSearch() {
-//   const config = {};
-//   const auto = new autoComplete({
-//     searchEngine: 'custom',
-//     selector: '#city-input',
-//     data: {
-//       src: async (query: string) => {
-//         return await fetchCities(query);
-//       },
-//       keys: ['label'],
-//     },
-//     debounce: 500,
-//     resultItem: {
-//       element: (item, data) => {},
-//     },
-//   });
-// }
-// citiesList.map((row) => {
-//   return `${row.label.name}, ${row.label.region} ${row.label.countryCode}`;
-// });
+import { CitiesObj, Coordinates } from '../types/appTypes.types';
+import { refreshPage } from './app';
+import { fetchCities } from '../helpers/apiHelpers';
+import type { AutocompleteSource } from '@algolia/autocomplete-js';
+import { getElement } from '../utilities/typeUtility';
 
 function debouncePromise<TParams extends Array<unknown>, TRes>(
   fn: (...a: TParams) => Promise<TRes>,

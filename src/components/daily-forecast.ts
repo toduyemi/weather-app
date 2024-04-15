@@ -1,7 +1,7 @@
-import { iconPath } from '.';
-import { ForecastCard, JSONMap, Units } from './appTypes.types';
-import { printTempUnit, secondsToHHMM } from './controller';
-import * as openWeather from './openWeatherIcons.json';
+import { iconPath } from '../helpers/apiHelpers';
+import { ForecastCard, JSONMap, Units } from '../types/appTypes.types';
+import { printTempUnit, secondsToHHMM } from '../helpers/helpers';
+import * as openWeather from '../openWeatherIcons.json';
 import { formatInTimeZone } from 'date-fns-tz';
 
 export function renderDailyCards(forecast: ForecastCard, unitState: Units) {

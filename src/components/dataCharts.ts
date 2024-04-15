@@ -2,8 +2,9 @@ import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { enUS } from 'date-fns/locale';
-import { ForecastObj, Units } from './appTypes.types';
-import { getElement, printTempUnit } from './controller';
+import { ForecastObj, Units } from '../types/appTypes.types';
+import { printTempUnit } from '../helpers/helpers';
+import { getElement } from '../utilities/typeUtility';
 
 //chart 1 ===================>
 let chart1: Chart, chart2: Chart;
@@ -215,6 +216,7 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
     },
   });
 }
+
 function hexToRGB(hex: string, alpha: number) {
   var r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),

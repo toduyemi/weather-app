@@ -1,7 +1,8 @@
-import { iconPath } from '.';
-import { Units, WeatherCard } from './appTypes.types';
-import { getElement, printTempUnit } from './controller';
-import { GeoDBCityResponse } from './geoDB.types';
+import { iconPath } from '../helpers/apiHelpers';
+import { Units, WeatherCard } from '../types/appTypes.types';
+import { printTempUnit } from '../helpers/helpers';
+import { getElement } from '../utilities/typeUtility';
+import { GeoDBCityResponse } from '../types/geoDB.types';
 
 export function renderWeather(
   current: WeatherCard,
@@ -43,6 +44,3 @@ export function renderConditionsTitle(current: WeatherCard) {
 
   getElement('#current-conditions', HTMLElement).replaceChildren(currentCard);
 }
-
-// currentCard.querySelector('#description-output')!.textContent =
-//     `${current.weather_condition}`;

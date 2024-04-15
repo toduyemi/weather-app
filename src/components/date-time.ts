@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
-import { WeatherCard } from './appTypes.types';
-import { getElement, secondsToHHMM } from './controller';
+import { WeatherCard } from '../types/appTypes.types';
+import { secondsToHHMM } from '../helpers/helpers';
+import { getElement } from '../utilities/typeUtility';
 import { formatInTimeZone } from 'date-fns-tz';
 
 export function renderQueryTitle(weatherObj: WeatherCard) {
