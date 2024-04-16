@@ -20,9 +20,6 @@ export function renderDailyCards(forecast: ForecastCard, unitState: Units) {
     const prop: keyof typeof map = forecast[day].weather;
     const weatherIcon = new Image();
     weatherIcon.src = iconPath + `${map[prop].image}.svg`;
-    console.log(new Date(forecast[day].timestamp * 1000));
-    const newTs = forecast[day].timestamp + forecast[day].timezone_offset;
-    console.log(secondsToHHMM(forecast[day].timezone_offset));
 
     dailyCard.querySelector('.date')!.textContent = formatInTimeZone(
       forecast[day].timestamp * 1000,

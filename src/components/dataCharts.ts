@@ -3,8 +3,6 @@ import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { enUS } from 'date-fns/locale';
 import { ForecastObj, Units } from '../types/appTypes.types';
-import { printTempUnit } from '../helpers/helpers';
-import { getElement } from '../utilities/typeUtility';
 
 //chart 1 ===================>
 let chart1: Chart, chart2: Chart;
@@ -85,17 +83,9 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
     data: {
       labels: forecast.map((row) => row.date),
       datasets: [
-        //test data for NaN
-        // {
-        //   yAxisID: 'yPop2',
-        //   type: 'bar',
-        //   label: '# of Points',
-        //   data: new Array(40).fill(0),
-        //   borderWidth: 1,
-        // },
         {
           type: 'line',
-          label: 'temp every 3 hrs',
+          label: 'Temperature',
           data: forecast.map((row) => row.temp),
           tension: 0.4,
           pointStyle: 'rectRounded',
@@ -107,12 +97,10 @@ export async function renderChart(forecast: ForecastObj[], unitState: Units) {
           borderColor: 'rgba(255, 255, 255, 0.4)',
         },
         {
-          label: '3h rain level',
+          label: 'Amount of precipitation in the last 3 hours',
           type: 'bar',
           data: forecast.map((row) => {
             return (row.rain ?? 0) + (row.snow ?? 0);
-
-            // return 0;
           }),
           yAxisID: 'yPop',
           backgroundColor: 'rgba(151,187,205,0.5)',

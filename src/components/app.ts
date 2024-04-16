@@ -27,7 +27,6 @@ export async function refreshPage(coord: Coordinates, unitFlag: boolean) {
     units: unitUrl,
   });
   const forecastArr: ForecastObj[] = createForecastArr(responseFore);
-  console.log(responseWeath);
 
   renderChart(forecastArr, unitState);
   const daily = parse5DayForecast(forecastArr);
