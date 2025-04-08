@@ -1,4 +1,4 @@
-import { Units, WeatherCard, compassSector } from '../types/appTypes.types';
+'import { Units, WeatherCard, compassSector } from '../types/appTypes.types';
 import { convertToBeaufort, mpsToKmh } from '../helpers/beaufort';
 import { printSpeedUnit } from '../helpers/helpers';
 import { getElement } from '../utilities/typeUtility';
